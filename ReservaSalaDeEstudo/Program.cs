@@ -56,9 +56,13 @@ Console.Write("Informe a data da reserva (dd/MM/yyyy): ");
 while (true) {
     try {
         reserva.DataReserva = Console.ReadLine() ?? string.Empty;
-        if (DateTime.Parse(reserva.DataReserva) < DateTime.Parse(configuracao.DataMinima) || 
-            DateTime.Parse(reserva.DataReserva) > DateTime.Parse(configuracao.DataMaxima)){
-            throw new Exception($"A data {DateTime.Parse(reserva.DataReserva):dd/MM/yyyy} está fora do perído permitido ({DateTime.Parse(configuracao.DataMinima):dd/MM/yyyy} a {DateTime.Parse(configuracao.DataMaxima):dd/MM/yyyy}).");
+
+        var dataReserva = DateTime.Parse(reserva.DataReserva);
+        var dataMin = DateTime.Parse(configuracao.DataMinima);
+        var dataMax = DateTime.Parse(configuracao.DataMaxima);
+
+        if (dataReserva < dataMin || dataReserva > dataMax) {
+            throw new Exception($"A data {dataReserva:dd/MM/yyyy} está fora do período permitido ({dataMin:dd/MM/yyyy} a {dataMax:dd/MM/yyyy}).");
         }
         break;
     } catch (Exception e) {

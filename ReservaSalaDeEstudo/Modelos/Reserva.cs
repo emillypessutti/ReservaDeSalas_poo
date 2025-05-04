@@ -9,12 +9,12 @@ public class Reserva
     private string? _descricaoDaSala;
     private string? _capacidadeDaSala;
 
-    public String DataReserva {
+    public string DataReserva {
         get { return _dataReserva.ToString(); }
         set { _dataReserva = RegistrarData(value);}
     }
 
-    public String HoraReserva {
+    public string HoraReserva {
         get { return _horaReserva.ToString(); }
         set { _horaReserva = RegistrarHora(value);}
     }
@@ -27,12 +27,15 @@ public class Reserva
         _descricaoDaSala = value;}
     }
 
-    public String? CapacidadeDaSala{
+    public string? CapacidadeDaSala{
         get { return _capacidadeDaSala; }
-        set{_capacidadeDaSala = value is not null ? RegistrarCapacidade(value) :
-            throw new ArgumentNullException(nameof(value), "Capacidade da sala não pode ser nula!");}
-  }
-    public DateTime RegistrarData(string data){
+        set{ if (value is null) {
+            throw new ArgumentNullException(nameof(value), "Capacidade da sala não pode ser nula!");
+            }
+            _capacidadeDaSala = RegistrarCapacidade(value);
+        }
+    }
+    private DateTime RegistrarData(string data){
         if (!DateTime.TryParseExact(data,
                    "dd/MM/yyyy",
                    System.Globalization.CultureInfo.GetCultureInfo("pt-BR"),
@@ -44,7 +47,7 @@ public class Reserva
         return _data;
     }
 
-    public TimeSpan RegistrarHora(string hora) {
+    private TimeSpan RegistrarHora(string hora) {
         if (!TimeSpan.TryParse(hora, out TimeSpan _hora))
         {
         throw new Exception($"Hora {hora} Inválida!");
@@ -52,7 +55,7 @@ public class Reserva
         return _hora;
     }
 
-    private String RegistrarCapacidade(string capacidade) {
+    private string RegistrarCapacidade(string capacidade) {
         if (!int.TryParse(capacidade, out int capacidadeInt) || capacidadeInt <= 0 || capacidadeInt >= 40) {
             throw new Exception("A capacidade deve estar obrigatoriamente entre 1 e 40 alunos.");
         }
