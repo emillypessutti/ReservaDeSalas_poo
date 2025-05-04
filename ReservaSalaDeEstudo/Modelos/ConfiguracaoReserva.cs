@@ -11,42 +11,64 @@ public class ConfiguracaoReserva
     private TimeSpan _horaMaxima;
 
 
-    public DateTime DataMinina {
-        get { return _dataMinima; }
+    public String DataMinima {
+        get { return _dataMinima.ToString(); }
+        set { _dataMinima = _validarDataInformada(value);}
     }
 
-    public DateTime DataMaxima {
-        get { return _dataMaxima; }
+    public String DataMaxima {
+        get { return _dataMaxima.ToString(); }
+        set { _dataMaxima = _validarDataInformada(value);
+            ValidarData();}
     }
 
-    public TimeSpan HoraMinima {
-        get { return _horaMinima; }
+    public String HoraMinima {
+        get { return _horaMinima.ToString(); }
+        set { _horaMinima = ValidarHoraInformada(value);}
     }
 
-    public TimeSpan HoraMaxima {
-        get { return _horaMaxima; }
+    public String HoraMaxima {
+        get { return _horaMaxima.ToString(); }
+        set {_horaMaxima = ValidarHoraInformada(value);
+            ValidarHora();}
     }
 
-    public void ValidarData(DateTime dataMinima, DateTime dataMaxima)
+  private DateTime _validarDataInformada(string data)
+  {
+    if (!DateTime.TryParseExact(data,
+                   "dd/MM/yyyy",
+                   System.Globalization.CultureInfo.GetCultureInfo("pt-BR"),
+                   System.Globalization.DateTimeStyles.None,
+                   out DateTime _data))
     {
-        if (dataMinima < DateTime.Now || dataMaxima < DateTime.Now)
+      throw new Exception($"Data {data} Inválida!");
+    }
+    return _data;
+  }
+
+    public void ValidarData()
+    {
+        if (_dataMinima < DateTime.Now || _dataMaxima < DateTime.Now){
             throw new ArgumentException("As datas não podem ser anteriores à data atual.");
-
-        if (dataMinima >= dataMaxima)
-            throw new ArgumentException("A data mínima deve ser menor que a data máxima.");
-
-        _dataMinima = dataMinima;
-        _dataMaxima = dataMaxima;
+        } else if (_dataMinima >= _dataMaxima) {
+            throw new ArgumentException("A data máxima deve ser maior que a data máxima.");
+        }
 
     }
 
-    public void ValidarHora(TimeSpan horaMinima, TimeSpan horaMaxima)
+    public TimeSpan ValidarHoraInformada(string hora) {
+        if (!TimeSpan.TryParse(hora, out TimeSpan _hora))
+        {
+        throw new Exception($"Hora {hora} Inválida!");
+        }
+        return _hora;
+    }
+    public void ValidarHora()
     {   
-        if (horaMinima >= horaMaxima)
-            throw new ArgumentException("A hora mínima deve ser menor que a hora máxima.");
+        if (_horaMaxima <= _horaMinima) {
+            throw new ArgumentException("A hora máxima deve ser maior que a hora mínima.");
+        }
 
-        _horaMinima = horaMinima;
-        _horaMaxima = horaMaxima;
     }
 
 }
