@@ -9,15 +9,15 @@ A aplicação permite que o usuário forneça as informações necessárias para
 
 ## 2. Funcionalidades
 
-### Configurar data e hora mínima/máxima para as reservas
+### - Configurar data e hora mínima/máxima para as reservas
 
-### Agendar uma sala com:
+### - Agendar uma sala com:
   - Data
   - Hora
   - Descrição da sala
   - Capacidade de alunos (máx. 40)
   -   
-### Validações com mensagens de erro amigáveis
+### - Validações com mensagens de erro amigáveis
 
 
 ## 3. Construído com 
