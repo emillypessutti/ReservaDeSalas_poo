@@ -16,7 +16,7 @@ A aplicação permite que o usuário forneça as informações necessárias para
   - Hora
   - Descrição da sala
   - Capacidade de alunos (máx. 40)
-  -   
+    
 ### • Validações com mensagens de erro amigáveis
 
 
