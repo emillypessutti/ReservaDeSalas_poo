@@ -28,6 +28,10 @@ A aplicação permite que o usuário forneça as informações necessárias para
 ## 4. Como executar
 
 1. No terminal, navegue até a pasta do projeto:
-```cd ReservaSalaDeEstudo```
-2. Execute o comando e abaixo e compile o projeto:
-```dotnet run```
+```bash
+cd ReservaSalaDeEstudo
+```
+3. Execute o comando e abaixo e compile o projeto:
+```bash
+dotnet run
+```
