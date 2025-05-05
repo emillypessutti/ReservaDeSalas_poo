@@ -31,7 +31,7 @@ A aplicação permite que o usuário forneça as informações necessárias para
 ```bash
 cd ReservaSalaDeEstudo
 ```
-3. Execute o comando e abaixo e compile o projeto:
+2. Execute o comando e abaixo e compile o projeto:
 ```bash
 dotnet run
 ```
